@@ -8,12 +8,12 @@ class Match
 
   def initialize(player1, player2)
     @players = [player1, player2]
-    @board = Array.new(3) { Array.new(3, " ") }
+    @board = Array.new(3) { Array.new(3, ' ') }
     @spaces = 9
   end
 
   def available?(space)
-    @board[space[0]][space[1]] == " "    
+    @board[space[0]][space[1]] == ' '
   end
 
   def check_horizontal(player)
@@ -63,7 +63,7 @@ class Match
   end
 
   def draw_board
-    system("clear")
+    system('clear')
     puts "\n\n\n"
     puts "\t\t  #{@players[0].name}: #{@players[0].wins}\t#{@players[1].name}: #{@players[1].wins}"
     puts "\n\n\n"
@@ -74,13 +74,13 @@ class Match
     puts "\t\t\t #{@board[2][0]} | #{@board[2][1]} | #{@board[2][2]} \t\t 1 | 2 | 3 "
     puts "\n\n\n"
   end
-  
+
   def reset
-    @board = Array.new(3) { Array.new(3, " ") }
+    @board = Array.new(3) { Array.new(3, ' ') }
     @spaces = 9
   end
 
   def tie?
-    @spaces == 0
+    @spaces.zero?
   end
 end
