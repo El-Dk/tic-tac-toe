@@ -9,6 +9,7 @@ class Match
   def initialize(player1, player2)
     @players = [player1, player2]
     @board = Array.new(3) { Array.new(3, " ") }
+    @spaces = 9
   end
 
   def available?(space)
@@ -52,12 +53,13 @@ class Match
     check == diagonal1 || check == diagonal2
   end
 
-  def check_board(player)
+  def check_winner?(player)
     check_vertical(player) || check_horizontal(player) || check_diagonal(player)
   end
 
   def make_move(player, space)
     @board[space[0]][space[1]] = @players[player].symbol
+    @spaces -= 1
   end
 
   def draw_board
@@ -71,5 +73,14 @@ class Match
     puts "\t\t\t-----------\t\t-----------"
     puts "\t\t\t #{@board[2][0]} | #{@board[2][1]} | #{@board[2][2]} \t\t 1 | 2 | 3 "
     puts "\n\n\n"
+  end
+  
+  def reset
+    @board = Array.new(3) { Array.new(3, " ") }
+    @spaces = 9
+  end
+
+  def tie?
+    @spaces == 0
   end
 end
