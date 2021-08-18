@@ -8,7 +8,11 @@ class Match
 
   def initialize(player1, player2)
     @players = [player1, player2]
-    @board = Array.new(3) { Array.new(3, false) }
+    @board = Array.new(3) { Array.new(3, " ") }
+  end
+
+  def available?(space)
+    @board[space[0]][space[1]] == " "    
   end
 
   def check_horizontal(player)
@@ -54,6 +58,18 @@ class Match
 
   def make_move(player, space)
     @board[space[0]][space[1]] = @players[player].symbol
-    check_board(player)
+  end
+
+  def draw_board
+    system("clear")
+    puts "\n\n\n"
+    puts "\t\t  #{@players[0].name}: #{@players[0].wins}\t#{@players[1].name}: #{@players[1].wins}"
+    puts "\n\n\n"
+    puts "\t\t\t #{@board[0][0]} | #{@board[0][1]} | #{@board[0][2]} \t\t 7 | 8 | 9 "
+    puts "\t\t\t-----------\t\t-----------"
+    puts "\t\t\t #{@board[1][0]} | #{@board[1][1]} | #{@board[1][2]} \t\t 4 | 5 | 6 "
+    puts "\t\t\t-----------\t\t-----------"
+    puts "\t\t\t #{@board[2][0]} | #{@board[2][1]} | #{@board[2][2]} \t\t 1 | 2 | 3 "
+    puts "\n\n\n"
   end
 end
